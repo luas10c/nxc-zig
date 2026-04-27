@@ -1,0 +1,7 @@
+.{
+    .name = .nxc,
+    .fingerprint = 0x8e55fc2475068685,
+    .version = "0.1.0",
+    .minimum_zig_version = "0.16.0",
+    .paths = .{"."},
+}

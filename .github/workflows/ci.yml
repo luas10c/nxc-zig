@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install zvm
+        run: |
+          curl -fsSL https://www.zvm.app/install.sh | bash
+          echo "$HOME/.zvm/bin" >> $GITHUB_PATH
+          echo "$HOME/.zvm/self" >> $GITHUB_PATH
+
+      - name: Install Zig stable
+        run: |
+          zvm install stable
+          zvm use stable
+          zig version
+
+      - name: Run tests
+        run: zig build test --summary all
+
+      - name: Build
+        run: zig build
